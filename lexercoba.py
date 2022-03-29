@@ -4,8 +4,7 @@ class UntukLexer(Lexer):
 
     tokens = {NAME, NUMBER, STRING, PRINT, IF, THEN, ELSE, FOR, TO}
     ignore = '\t '
-    literals = { '=', '+', '-', '/', 
-                '*', '(', ')', ',', ';'}
+    literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';'}
   
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
