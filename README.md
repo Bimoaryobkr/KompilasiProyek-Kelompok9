@@ -1,1 +1,1 @@
-# proyektekkom
+# Proyek Teknik Kompilasi
