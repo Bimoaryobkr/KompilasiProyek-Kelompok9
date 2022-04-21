@@ -17,10 +17,8 @@ class UntukLexer(Lexer):
     ARROW = r'->'
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
-
     EQEQ = r'=='
     
-
     @_(r'\d+')
     def NUMBER(self, t):
         
