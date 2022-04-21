@@ -17,6 +17,38 @@ class UntukParser(Parser):
     def statement(self, p):
         pass
 
+    @_('NAME')
+    def expr(self, p):
+        return ('var', p.NAME)
+
+    @_('NUMBER')
+    def expr(self, p):
+        return ('num', p.NUMBER)
+
+    @_('expr')
+    def statement(self, p):
+        return (p.expr)
+
+    @_('expr "+" expr')
+    def expr(self, p):
+        return ('add', p.expr0, p.expr1)
+
+    @_('expr "-" expr')
+    def expr(self, p):
+        return ('sub', p.expr0, p.expr1)
+
+    @_('expr "*" expr')
+    def expr(self, p):
+        return ('mul', p.expr0, p.expr1)
+
+    @_('expr "/" expr')
+    def expr(self, p):
+        return ('div', p.expr0, p.expr1)
+
+    @_('"-" expr %prec UMINUS')
+    def expr(self, p):
+        return p.expr
+
     @_('FOR var_assign TO expr THEN statement')
     def statement(self, p):
         return ('for_loop', ('for_loop_setup', p.var_assign, p.expr), p.statement)
@@ -48,38 +80,6 @@ class UntukParser(Parser):
     @_('NAME "=" STRING')
     def var_assign(self, p):
         return ('var_assign', p.NAME, p.STRING)
-
-    @_('expr')
-    def statement(self, p):
-        return (p.expr)
-
-    @_('expr "+" expr')
-    def expr(self, p):
-        return ('add', p.expr0, p.expr1)
-
-    @_('expr "-" expr')
-    def expr(self, p):
-        return ('sub', p.expr0, p.expr1)
-
-    @_('expr "*" expr')
-    def expr(self, p):
-        return ('mul', p.expr0, p.expr1)
-
-    @_('expr "/" expr')
-    def expr(self, p):
-        return ('div', p.expr0, p.expr1)
-
-    @_('"-" expr %prec UMINUS')
-    def expr(self, p):
-        return p.expr
-
-    @_('NAME')
-    def expr(self, p):
-        return ('var', p.NAME)
-
-    @_('NUMBER')
-    def expr(self, p):
-        return ('num', p.NUMBER)
         
     @_('PRINT expr')
     def expr(self, p):

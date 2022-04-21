@@ -6,13 +6,14 @@ class UntukLexer(Lexer):
     ignore = '\t '
     literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';'}
   
-    PRINT = r'TULIS'
+
     IF = r'BILA'
     THEN = r'MAKA'
     ELSE = r'LAIN'
     FOR = r'UNTUK'
     TO = r'HINGGA'
     FUN = r'FUNGSI'
+    PRINT = r'TULIS'
     ARROW = r'->'
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
