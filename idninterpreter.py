@@ -1,5 +1,5 @@
-import cobalexer
-import cobaparser
+import idnlexer
+import idnparser
 
 class UntukEksekusi:
 
@@ -103,8 +103,8 @@ class UntukEksekusi:
 
 
 if __name__ == '__main__':
-    lexer = cobalexer.UntukLexer()
-    parser = cobaparser.UntukParser()
+    lexer = idnlexer.UntukLexer()
+    parser = idnparser.UntukParser()
     env = {}
     while True:
         try:

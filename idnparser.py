@@ -1,9 +1,9 @@
 from sly import Parser
 
-import cobalexer
+import idnlexer
 
 class UntukParser(Parser):
-    tokens = cobalexer.UntukLexer.tokens
+    tokens = idnlexer.UntukLexer.tokens
 
     precedence = (
         ('left', '+', '-'),
@@ -90,7 +90,7 @@ class UntukParser(Parser):
         return ('print', p.STRING)
 
 if __name__ == '__main__':
-    lexer = cobalexer.UntukLexer()
+    lexer = idnlexer.UntukLexer()
     parser = UntukParser()
     env = {}
     while True:
