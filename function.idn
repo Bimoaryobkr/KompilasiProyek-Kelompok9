@@ -1,0 +1,3 @@
+FUNGSI baca() -> TULIS "Hari yang cukup baik"
+
+baca()
