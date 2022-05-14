@@ -25,7 +25,7 @@ class UntukLexer(Lexer):
         t.value = int(t.value) 
         return t
   
-    @_(r'//.*')
+    @_(r'`.*')
     def COMMENT(self, t):
         pass
   
