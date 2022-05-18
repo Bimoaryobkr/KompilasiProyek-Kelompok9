@@ -1,0 +1,8 @@
+TULIS "Hello World"
+a = 3
+b = 2
+c = "benar"
+d = "salah"
+BILA a+b==3 MAKA TULIS c LAIN TULIS d
+
+UNTUK e=0 HINGGA 5 MAKA TULIS b+e
