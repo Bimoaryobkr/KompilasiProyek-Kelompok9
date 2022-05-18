@@ -1,15 +1,13 @@
-import idnlexer
-import idnparser
-import idninterpreter
+import bahasaidn
 
 from sys import *
 
-lexer = idnlexer.UntukLexer()
-parser = idnparser.UntukParser()
+lexer = bahasaidn.UntukLexer()
+parser = bahasaidn.UntukParser()
 env = {}
 
 file = open(argv[1])
 text = file.readlines()
 for line in text:
     tree = parser.parse(lexer.tokenize(line))
-    idninterpreter.UntukEksekusi(tree, env)
+    bahasaidn.UntukEksekusi(tree, env)
