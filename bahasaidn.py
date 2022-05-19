@@ -4,7 +4,7 @@ from sly import Parser
 #Lexer
 class UntukLexer(Lexer):
 
-    tokens = {NAME, NUMBER, STRING, PRINT, IF, THEN, ELSE, FOR, TO, FUNCTION, EQUATION, ARROW}
+    tokens = {NAME, NUMBER, STRING, PRINT, IF, THEN, ELSE, FOR, TO, FUNCTION, EQUALITY, ARROW}
     ignore = '\t '
     literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';'}
   
@@ -19,7 +19,7 @@ class UntukLexer(Lexer):
     ARROW = r'->'
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
-    EQUATION = r'=='
+    EQUALITY = r'=='
     
     @_(r'\d+')
     def NUMBER(self, t):
@@ -99,9 +99,9 @@ class UntukParser(Parser):
     def statement(self, p):
         return ('function_call', p.NAME)
 
-    @_('expr EQUATION expr')
+    @_('expr EQUALITY expr')
     def condition(self, p):
-        return ('condition_equation', p.expr0, p.expr1)
+        return ('condition_equality', p.expr0, p.expr1)
 
     @_('var_assign')
     def statement(self, p):
@@ -171,7 +171,7 @@ class UntukEksekusi:
                 return self.walkTree(node[2][1])
             return self.walkTree(node[2][2])
 
-        if node[0] == 'condition_equation':
+        if node[0] == 'condition_equality':
             return self.walkTree(node[1]) == self.walkTree(node[2])
 
 ## Interpreter untuk penggunaan FUN (fungsi)
