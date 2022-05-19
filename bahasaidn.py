@@ -4,7 +4,7 @@ from sly import Parser
 #Lexer
 class UntukLexer(Lexer):
 
-    tokens = {NAME, NUMBER, STRING, PRINT, IF, THEN, ELSE, FOR, TO, FUN, EQEQ, ARROW}
+    tokens = {NAME, NUMBER, STRING, PRINT, IF, THEN, ELSE, FOR, TO, FUNCTION, EQUATION, ARROW}
     ignore = '\t '
     literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';'}
   
@@ -14,12 +14,12 @@ class UntukLexer(Lexer):
     ELSE = r'LAIN'
     FOR = r'UNTUK'
     TO = r'HINGGA'
-    FUN = r'FUNGSI'
+    FUNCTION = r'FUNGSI'
     PRINT = r'TULIS'
     ARROW = r'->'
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
-    EQEQ = r'=='
+    EQUATION = r'=='
     
     @_(r'\d+')
     def NUMBER(self, t):
@@ -91,17 +91,17 @@ class UntukParser(Parser):
     def statement(self, p):
         return ('if_stmt', p.condition, ('branch', p.statement0, p.statement1))
 
-    @_('FUN NAME "(" ")" ARROW statement')
+    @_('FUNCTION NAME "(" ")" ARROW statement')
     def statement(self, p):
-        return ('fun_def', p.NAME, p.statement)
+        return ('function_def', p.NAME, p.statement)
 
     @_('NAME "(" ")"')
     def statement(self, p):
-        return ('fun_call', p.NAME)
+        return ('function_call', p.NAME)
 
-    @_('expr EQEQ expr')
+    @_('expr EQUATION expr')
     def condition(self, p):
-        return ('condition_eqeq', p.expr0, p.expr1)
+        return ('condition_equation', p.expr0, p.expr1)
 
     @_('var_assign')
     def statement(self, p):
@@ -171,14 +171,14 @@ class UntukEksekusi:
                 return self.walkTree(node[2][1])
             return self.walkTree(node[2][2])
 
-        if node[0] == 'condition_eqeq':
+        if node[0] == 'condition_equation':
             return self.walkTree(node[1]) == self.walkTree(node[2])
 
 ## Interpreter untuk penggunaan FUN (fungsi)
-        if node[0] == 'fun_def':
+        if node[0] == 'function_def':
             self.env[node[1]] = node[2]
 
-        if node[0] == 'fun_call':
+        if node[0] == 'function_call':
             try:
                 return self.walkTree(self.env[node[1]])
             except LookupError:
