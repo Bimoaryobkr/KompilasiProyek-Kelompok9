@@ -65,9 +65,9 @@ class UntukParser(Parser):
     def statement(self, p):
         return ('function_call', p.NAME)
 
-    @_('expr EQUATION expr')
+    @_('expr EQUALITY expr')
     def condition(self, p):
-        return ('condition_equation', p.expr0, p.expr1)
+        return ('condition_equality', p.expr0, p.expr1)
 
     @_('var_assign')
     def statement(self, p):
