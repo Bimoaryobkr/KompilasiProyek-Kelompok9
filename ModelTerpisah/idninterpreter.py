@@ -48,14 +48,14 @@ class UntukEksekusi:
                 return self.walkTree(node[2][1])
             return self.walkTree(node[2][2])
 
-        if node[0] == 'condition_eqeq':
+        if node[0] == 'condition_equation':
             return self.walkTree(node[1]) == self.walkTree(node[2])
 
 ## Interpreter untuk penggunaan FUN (fungsi)
-        if node[0] == 'fun_def':
+        if node[0] == 'function_def':
             self.env[node[1]] = node[2]
 
-        if node[0] == 'fun_call':
+        if node[0] == 'function_call':
             try:
                 return self.walkTree(self.env[node[1]])
             except LookupError:

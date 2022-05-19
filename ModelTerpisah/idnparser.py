@@ -57,17 +57,17 @@ class UntukParser(Parser):
     def statement(self, p):
         return ('if_stmt', p.condition, ('branch', p.statement0, p.statement1))
 
-    @_('FUN NAME "(" ")" ARROW statement')
+    @_('FUNCTION NAME "(" ")" ARROW statement')
     def statement(self, p):
-        return ('fun_def', p.NAME, p.statement)
+        return ('function_def', p.NAME, p.statement)
 
     @_('NAME "(" ")"')
     def statement(self, p):
-        return ('fun_call', p.NAME)
+        return ('function_call', p.NAME)
 
-    @_('expr EQEQ expr')
+    @_('expr EQUATION expr')
     def condition(self, p):
-        return ('condition_eqeq', p.expr0, p.expr1)
+        return ('condition_equation', p.expr0, p.expr1)
 
     @_('var_assign')
     def statement(self, p):

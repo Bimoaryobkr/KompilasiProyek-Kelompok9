@@ -2,7 +2,7 @@ from sly import Lexer
 
 class UntukLexer(Lexer):
 
-    tokens = {NAME, NUMBER, STRING, PRINT, IF, THEN, ELSE, FOR, TO, FUN, EQEQ, ARROW}
+    tokens = {NAME, NUMBER, STRING, PRINT, IF, THEN, ELSE, FOR, TO, FUNCTION, EQUATION, ARROW}
     ignore = '\t '
     literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';'}
   
@@ -12,12 +12,12 @@ class UntukLexer(Lexer):
     ELSE = r'LAIN'
     FOR = r'UNTUK'
     TO = r'HINGGA'
-    FUN = r'FUNGSI'
+    FUNCTION = r'FUNGSI'
     PRINT = r'TULIS'
     ARROW = r'->'
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
-    EQEQ = r'=='
+    EQUATION = r'=='
     
     @_(r'\d+')
     def NUMBER(self, t):
