@@ -174,7 +174,7 @@ class UntukEksekusi:
         if node[0] == 'condition_equality':
             return self.walkTree(node[1]) == self.walkTree(node[2])
 
-## Interpreter untuk penggunaan FUN (fungsi)
+## Interpreter untuk penggunaan FUNCTION (fungsi)
         if node[0] == 'function_def':
             self.env[node[1]] = node[2]
 
